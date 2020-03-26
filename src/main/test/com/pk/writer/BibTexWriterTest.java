@@ -14,7 +14,7 @@ class BibTexWriterTest {
 
     // tests if content of written file is what it should be
     @Test
-    void write_contentInFileSameAsExpected_True() {
+    void write_contentInFileSameAsExpected_true() {
 
         // Given
         Book book = new Book("J.R.R Martin", "A Song of Ice and Fire", "fantasy", "Bantam Books", LocalDate.of(1996, Month.JULY, 1), 50, "Basically Game of thrones");
@@ -35,8 +35,7 @@ class BibTexWriterTest {
                 "month = jul,\n" +
                 "publisher = {Bantam Books},\n" +
                 "price = 50.0,\n" +
-                "note = {Genre: fantasy, desc: Basically Game of thrones}\n" +
-                "}\n";
+                "note = {Genre: fantasy, desc: Basically Game of thrones}}\n";
 
         StringBuilder fileContent = new StringBuilder();
         File file = new File(path);
@@ -49,13 +48,13 @@ class BibTexWriterTest {
             e.printStackTrace();
         }
 
-        System.out.println(fileContent);
+        //System.out.println(fileContent);
         assertEquals(fileShouldContain, fileContent.toString());
     }
 
     // tests if created file has content
     @Test
-    void write_fileEmpty_False() {
+    void write_fileEmpty_false() {
 
         // Given
         Book book = new Book("J.K Rowling", "Harry Potter and the Philosopher's Stone", "fantasy", "Scholastic Corporation", LocalDate.of(1997, Month.JUNE, 26), 40, "Book about wizards");
@@ -71,5 +70,4 @@ class BibTexWriterTest {
         File file = new File(path);
         assertNotEquals(0, file.length());
     }
-
 }
