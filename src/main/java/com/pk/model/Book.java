@@ -6,14 +6,16 @@ public class Book {
     private String author;
     private String title;
     private String genre;
+    private String publisher;
     private LocalDate published_date;
     private double price;
     private String description;
 
-    public Book(String author, String title, String genre, LocalDate published_date, double price, String description) {
+    public Book(String author, String title, String genre, String publisher, LocalDate published_date, double price, String description) {
         this.author = author;
         this.title = title;
         this.genre = genre;
+        this.publisher = publisher;
         this.published_date = published_date;
         this.price = price;
         this.description = description;
@@ -42,6 +44,10 @@ public class Book {
     public void setGenre(String genre) {
         this.genre = genre;
     }
+
+    public String getPublisher() { return publisher; }
+
+    void setPublisher(String publisher) { this.publisher = publisher; }
 
     public LocalDate getPublished_date() {
         return published_date;
