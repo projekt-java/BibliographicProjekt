@@ -7,48 +7,42 @@ import java.util.Locale;
 
 public class BooksService {
 
-    // creates string from book data to be saved as bibTex
+    /**
+     * <p>Returns string made of all book elements for saving to BibTex format.</p>
+     * @param book Book of which string will be returned
+     * @return String in BibTex format
+     */
     public static String bookToBibTexString(Book book) {
-
         String format = "@book";
         String key = "book";
         StringBuilder bibTexString = new StringBuilder(format);
 
-        bibTexString.append("{");
-        bibTexString.append(key);
-        bibTexString.append(",\n");
-
-        bibTexString.append("author = {");
-        bibTexString.append(book.getAuthor());
-        bibTexString.append("},\n");
-
-        bibTexString.append("title = {");
-        bibTexString.append(book.getTitle());
-        bibTexString.append("},\n");
-
-        bibTexString.append("year = {");
-        bibTexString.append(book.getPublished_date().getYear());
-        bibTexString.append("},\n");
-
-        bibTexString.append("month = ");
-        bibTexString.append(book.getPublished_date().getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH).toLowerCase());
-        bibTexString.append(",\n");
-
-        bibTexString.append("publisher = {");
-        bibTexString.append(book.getPublisher());
-        bibTexString.append("},\n");
-
-        bibTexString.append("price = ");
-        bibTexString.append(book.getPrice());
-        bibTexString.append(",\n");
-
-        bibTexString.append("note = {Genre: ");
-        bibTexString.append(book.getGenre());
-        bibTexString.append(", desc: ");
-        bibTexString.append(book.getDescription());
-        bibTexString.append("}}\n");
-
-        return bibTexString.toString();
+        return bibTexString.
+                append("{").
+                append(key).
+                append(",\n").
+                append("author = {").
+                append(book.getAuthor()).
+                append("},\n").
+                append("title = {").
+                append(book.getTitle()).
+                append("},\n").
+                append("year = {").
+                append(book.getPublished_date().getYear()).
+                append("},\n").
+                append("month = ").
+                append(book.getPublished_date().getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH).toLowerCase()).
+                append(",\n").
+                append("publisher = {").
+                append(book.getPublisher()).
+                append("},\n").
+                append("price = ").
+                append(book.getPrice()).
+                append(",\n").
+                append("note = {Genre: ").
+                append(book.getGenre()).
+                append(", desc: ").
+                append(book.getDescription()).
+                append("}}\n").toString();
     }
-
 }
