@@ -28,7 +28,7 @@ class BibTexWriterTest {
         writer.write(books, path);
 
         // Then
-        String fileShouldContain = "@book{book,\n" +
+        String fileShouldContain = "@book{martin1996,\n" +
                 "author = {J.R.R Martin},\n" +
                 "title = {A Song of Ice and Fire},\n" +
                 "year = {1996},\n" +
@@ -48,7 +48,6 @@ class BibTexWriterTest {
             e.printStackTrace();
         }
 
-        //System.out.println(fileContent);
         assertEquals(fileShouldContain, fileContent.toString());
     }
 

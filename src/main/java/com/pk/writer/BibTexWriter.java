@@ -6,22 +6,25 @@ import com.pk.service.BooksService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashSet;
 
 public class BibTexWriter implements BooksWriter {
 
     @Override
     public void write(Book[] books, String path) {
         //name of the file should have .bib extension
+
+        HashSet<String> keys = new HashSet<>();
+
         try(
                 FileWriter file = new FileWriter(path);
                 BufferedWriter writer = new BufferedWriter(file)
         ) {
             for(Book book: books) {
-                writer.write(BooksService.bookToBibTexString(book));
+                writer.write(BooksService.bookToBibTexString(book, keys));
             }
         } catch (IOException exception) {
             exception.printStackTrace();
         }
     }
-
 }
