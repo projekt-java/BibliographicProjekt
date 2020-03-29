@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +16,7 @@ class BooksServiceTest {
     void bookToBibTexString_stringExpected_true() {
 
         // Given
-        HashSet<String> keys = new HashSet<>();
+        Set<String> keys = new HashSet<>();
         Book book = new Book("J.R.R Martin", "A Song of Ice and Fire", "fantasy", "Bantam Books", LocalDate.of(1996, Month.JULY, 1), 50, "Basically Game of thrones");
 
         // When

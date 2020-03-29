@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Set;
 
 public class BibTexWriter implements BooksWriter {
 
@@ -14,7 +15,7 @@ public class BibTexWriter implements BooksWriter {
     public void write(Book[] books, String path) {
         //name of the file should have .bib extension
 
-        HashSet<String> keys = new HashSet<>();
+        Set<String> keys = new HashSet<>();
 
         try(
                 FileWriter file = new FileWriter(path);
