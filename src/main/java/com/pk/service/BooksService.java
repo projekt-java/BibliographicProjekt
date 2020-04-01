@@ -1,10 +1,16 @@
 package com.pk.service;
 
+import com.pk.adapter.ElementAdapter;
 import com.pk.model.Book;
+import org.dom4j.Element;
 
+import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.Set;
+
+import static java.lang.Double.*;
+import static java.util.Optional.ofNullable;
 
 public class BooksService {
 
@@ -31,10 +37,10 @@ public class BooksService {
                 .append(book.getTitle())
                 .append("},\n")
                 .append("year = {")
-                .append(book.getPublished_date().getYear())
+                .append(book.getPublishedDate().getYear())
                 .append("},\n")
                 .append("month = ")
-                .append(book.getPublished_date().getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH).toLowerCase())
+                .append(book.getPublishedDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH).toLowerCase())
                 .append(",\n")
                 .append("publisher = {")
                 .append(book.getPublisher())
@@ -63,9 +69,9 @@ public class BooksService {
         String authorFullName = book.getAuthor().toLowerCase();
         if(authorFullName.contains(" ")) {
             String[] authorSurname = authorFullName.split(" ");
-            key = authorSurname[authorSurname.length - 1] + book.getPublished_date().getYear();
+            key = authorSurname[authorSurname.length - 1] + book.getPublishedDate().getYear();
         } else {
-            key = authorFullName + book.getPublished_date().getYear();
+            key = authorFullName + book.getPublishedDate().getYear();
         }
 
         String oldKey = key;
@@ -80,4 +86,17 @@ public class BooksService {
         return key;
     }
 
+    public static Book xmlElementToBook(Element el) {
+        String stringDate = ofNullable(el.element("published_date")).orElse(new ElementAdapter(null)).getText();
+
+        return Book.builder()
+                .author(ofNullable(el.element("author")).orElse(new ElementAdapter(null)).getText())
+                .title(ofNullable(el.element("title")).orElse(new ElementAdapter(null)).getText())
+                .genre(ofNullable(el.element("genre")).orElse(new ElementAdapter(null)).getText())
+                .publisher(ofNullable(el.element("publisher")).orElse(new ElementAdapter(null)).getText())
+                .publishedDate(stringDate != null ? LocalDate.parse(stringDate) : null)
+                .price(parseDouble(ofNullable(el.element("price")).orElse(new ElementAdapter("0")).getText()))
+                .description(ofNullable(el.element("description")).orElse(new ElementAdapter(null)).getText())
+                .build();
+    }
 }
