@@ -8,12 +8,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Implements all methods of {@link Element}, so you don't have to implement it all the time. It's pretty useful e.g.
+ * in testing.
+ */
 public class ElementAdapter implements Element {
     private String text;
 
     public ElementAdapter() {
     }
 
+    /**
+     * @param text The value that will be return after calling {@link #getText()} method.
+     */
     public ElementAdapter(String text) {
         this.text = text;
     }

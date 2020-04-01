@@ -86,9 +86,17 @@ public class BooksService {
         return key;
     }
 
+    /**
+     * Converts xml {@link Element} to {@link Book}. If some data is missing, the adequate field will be null.
+     * @param el Xml {@link Element} that will be converted to {@link Book}.
+     * @return {@link Book} converted from xml {@link Element}.
+     */
     public static Book xmlElementToBook(Element el) {
+        // getting published_date from element. If there is no published_date, it returns null.
         String stringDate = ofNullable(el.element("published_date")).orElse(new ElementAdapter(null)).getText();
 
+        // Every lines checks if value exists. ofNullable method checks if expected element exists, if not, orElse
+        // method returns custom element.
         return Book.builder()
                 .author(ofNullable(el.element("author")).orElse(new ElementAdapter(null)).getText())
                 .title(ofNullable(el.element("title")).orElse(new ElementAdapter(null)).getText())

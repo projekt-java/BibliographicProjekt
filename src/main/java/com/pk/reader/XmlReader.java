@@ -11,17 +11,24 @@ import java.util.zip.DataFormatException;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * Converts xml data to {@link Book} objects.
+ */
 public class XmlReader implements BooksReader {
     @Override
     public List<Book> read(String path) throws Exception {
+        // looking for root element
         SAXReader reader = new SAXReader();
         Document document = reader.read(path);
         Element rootElement = document.getRootElement();
 
+        // checking if root has proper name
         String rootName = rootElement.getName();
         if (!rootName.equalsIgnoreCase("books")) {
             throw new DataFormatException("The root element should be named 'books', not " + rootName);
         }
+
+        // mapping root's elements to books
         return rootElement.elements("book").stream().map(BooksService::xmlElementToBook).collect(toList());
     }
 }
