@@ -1,4 +1,11 @@
 package com.pk.writer;
 
-public class RtfWriter {
+import com.pk.model.Book;
+
+
+public class RtfWriter implements BooksWriter {
+    @Override
+    public void write(Book[] books, String path) {
+
+    }
 }
