@@ -25,7 +25,7 @@ public class BooksWriterFactory {
             case RTF:
                 return null; // todo return rtf writer
             case TXT:
-                return null; // todo return txt writer
+                return new TxtWriter();
             default:
                 throw new IllegalArgumentException();
         }
