@@ -49,7 +49,7 @@ public class Book {
 
     public String getPublisher() { return publisher; }
 
-    void setPublisher(String publisher) { this.publisher = publisher; }
+    public void setPublisher(String publisher) { this.publisher = publisher; }
 
     public LocalDate getPublishedDate() {
         return publishedDate;
