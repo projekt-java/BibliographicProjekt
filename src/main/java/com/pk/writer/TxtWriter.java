@@ -27,7 +27,14 @@ public class TxtWriter implements BooksWriter {
                 BufferedWriter writer = new BufferedWriter(file)
         ) {
                 for ( Book book: books){
-                    writer.write(book.toString()+"\n");
+                    writer.write(book.getAuthor()+"\n");
+                    writer.write(book.getTitle()+"\n");
+                    writer.write(book.getGenre()+"\n");
+                    writer.write(book.getPublisher()+"\n");
+                    writer.write(book.getPublishedDate()+"\n");
+                    writer.write(book.getPrice()+"\n");
+                    writer.write(book.getDescription()+"\n");
+                    writer.write("\n");
                 }
 
         } catch (IOException exception) {

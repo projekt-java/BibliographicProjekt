@@ -44,11 +44,12 @@ class TxtWriterTest {
         TxtWriter writer = new  TxtWriter();
 
         //When
-        String path = "data.txt";
+        String path = "data2.txt";
         writer.write(books, path);
 
         //Then
-        String fileShouldContain = books[0].toString()+"\n"+books[1].toString()+"\n";
+        String fileShouldContain = books[0].getAuthor()+"\n"+books[0].getTitle()+"\n"+books[0].getGenre()+"\n"+books[0].getPublisher()+"\n"+books[0].getPublishedDate()+"\n"+books[0].getPrice()+"\n"+books[0].getDescription()+"\n\n";
+        fileShouldContain += books[1].getAuthor()+"\n"+books[1].getTitle()+"\n"+books[1].getGenre()+"\n"+books[1].getPublisher()+"\n"+books[1].getPublishedDate()+"\n"+books[1].getPrice()+"\n"+books[1].getDescription()+"\n\n";
         StringBuilder fileContent = new StringBuilder();
         File file = new File(path);
         try(Scanner scanner = new Scanner(file)) {
