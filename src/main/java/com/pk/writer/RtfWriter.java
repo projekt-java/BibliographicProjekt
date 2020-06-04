@@ -15,6 +15,8 @@ public class RtfWriter implements BooksWriter {
     public void write(Book[] books, String path) {
         try
         {
+            /* TODO: We need to discuss what rtf styling we would like to implement */
+            //  https://github.com/ullenboom/jrtf
             var temp = Rtf.rtf();
             for (Book book :books) {
                         temp.info(author(book.getAuthor()), title(book.getTitle()))
