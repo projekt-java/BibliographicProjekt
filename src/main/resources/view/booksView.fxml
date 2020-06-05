@@ -25,9 +25,9 @@
             <Label minWidth="20.0" />
             <MenuButton mnemonicParsing="false" text="Save as">
               <items>
-                <MenuItem mnemonicParsing="false" text="Rtf" />
-                <MenuItem mnemonicParsing="false" text="BibTeX" />
-                  <MenuItem mnemonicParsing="false" text="Plain text" />
+                <MenuItem mnemonicParsing="false" onAction="#saveRtf" text="Rtf" />
+                <MenuItem mnemonicParsing="false" onAction="#saveBibTeX" text="BibTeX" />
+                  <MenuItem mnemonicParsing="false" onAction="#savePlainText" text="Plain text" />
               </items>
             </MenuButton>
          </children>

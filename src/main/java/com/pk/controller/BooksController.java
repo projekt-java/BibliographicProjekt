@@ -1,6 +1,8 @@
 package com.pk.controller;
 
 import com.pk.model.Book;
+import com.pk.writer.BooksWriterFactory;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -9,9 +11,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.LocalDateStringConverter;
 
+import java.io.File;
 import java.time.LocalDate;
 
 /**
@@ -128,5 +132,29 @@ public class BooksController {
                 .title("Another title 2")
                 .build();
         booksTable.getItems().add(book);
+    }
+
+    private void saveBooks(int fileType) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(BooksWriterFactory.getExtensionsFilter(fileType));
+        File file = fileChooser.showSaveDialog(booksTable.getScene().getWindow());
+        if (file != null) {
+            String path = file.getPath();
+            System.out.println(path);
+            ObservableList<Book> books = booksTable.getItems();
+            BooksWriterFactory.getBooksWriter(fileType).write(books.toArray(new Book[books.size()]), path);
+        }
+    }
+
+    public void saveRtf() {
+        saveBooks(BooksWriterFactory.RTF);
+    }
+
+    public void saveBibTeX() {
+        saveBooks(BooksWriterFactory.BIBTEX);
+    }
+
+    public void savePlainText() {
+        saveBooks(BooksWriterFactory.TXT);
     }
 }
