@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<books>
+    <book>
+        <author>Rickard Androli</author>
+        <title>Like Minds (Murderous Intent)</title>
+        <genre>Crime|Mystery|Thriller</genre>
+        <publisher>HarperCollins</publisher>
+        <published_date>1996-11-16</published_date>
+        <price>59.25</price>
+        <description>desc</description>
+    </book>
+    <book>
+        <author>Alia Ciccottio</author>
+        <title>Snakes on a Plane</title>
+        <genre>Action|Comedy|Horror|Thriller</genre>
+        <publisher>Penguin Random House</publisher>
+        <published_date>1994-12-21</published_date>
+        <price>59.62</price>
+        <description>desc</description>
+    </book>
+</books>
