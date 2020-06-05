@@ -111,29 +111,6 @@ public class BooksController {
     @FXML
     void initialize() {
         initTable();
-
-        // todo temporary books
-        Book book = Book.builder()
-                .author("author 1")
-                .description("Some description 1")
-                .genre("genre 1")
-                .price(12.12)
-                .publishedDate(LocalDate.now())
-                .publisher("Publisher 1")
-                .title("Some title 1")
-                .build();
-        booksTable.getItems().add(book);
-
-        book = Book.builder()
-                .author("author 2")
-                .description("Some description 2")
-                .genre("genre 2")
-                .price(12.12)
-                .publishedDate(LocalDate.now())
-                .publisher("Publisher 2")
-                .title("Another title 2")
-                .build();
-        booksTable.getItems().add(book);
     }
 
     public void loadBooksButton() {
