@@ -114,19 +114,17 @@ public class BooksController {
         booksTable.setEditable(true);
     }
 
+    /**
+     * Initialize spinner that represents price of book.
+     */
     private void initPriceSpinner() {
         SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory
                 .DoubleSpinnerValueFactory(0.0, Short.MAX_VALUE, 10.0, 0.5);
         priceInput.setValueFactory(valueFactory);
     }
 
-    private void initPublishedDateSpinner() {
-
-    }
-
     @FXML
     void initialize() {
-        initPublishedDateSpinner();
         initPriceSpinner();
         initTable();
     }
@@ -199,6 +197,9 @@ public class BooksController {
         }
     }
 
+    /**
+     * Adds new book to table. Gets data from inputs.
+     */
     public void addNewBook() {
         Book book = Book.builder()
                 .author(authorInput.getText())
