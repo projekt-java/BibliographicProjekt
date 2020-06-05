@@ -1,9 +1,9 @@
 package com.pk.controller;
 
 import com.pk.model.Book;
+import com.pk.reader.BooksReaderFactory;
 import com.pk.writer.BooksWriterFactory;
 import javafx.collections.ObservableList;
-import com.pk.reader.BooksReaderFactory;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -167,5 +167,12 @@ public class BooksController {
      */
     public void savePlainText() {
         saveBooks(BooksWriterFactory.TXT);
+    }
+
+    /**
+     * Removes all books.
+     */
+    public void reset() {
+        booksTable.getItems().clear();
     }
 }
