@@ -21,7 +21,7 @@
       <HBox prefWidth="200.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" text="New" />
-            <Button mnemonicParsing="false" text="Load books" />
+            <Button mnemonicParsing="false" onAction="#loadBooksButton" text="Load books" />
             <Label minWidth="20.0" />
             <MenuButton mnemonicParsing="false" text="Save as">
               <items>

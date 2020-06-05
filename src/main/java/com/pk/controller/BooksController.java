@@ -1,6 +1,7 @@
 package com.pk.controller;
 
 import com.pk.model.Book;
+import com.pk.reader.BooksReaderFactory;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -9,10 +10,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.LocalDateStringConverter;
 
+import java.io.File;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Controller of books view.
@@ -102,31 +106,27 @@ public class BooksController {
         booksTable.setEditable(true);
     }
 
+
+
     @FXML
     void initialize() {
         initTable();
+    }
 
-        // todo temporary books
-        Book book = Book.builder()
-                .author("author 1")
-                .description("Some description 1")
-                .genre("genre 1")
-                .price(12.12)
-                .publishedDate(LocalDate.now())
-                .publisher("Publisher 1")
-                .title("Some title 1")
-                .build();
-        booksTable.getItems().add(book);
-
-        book = Book.builder()
-                .author("author 2")
-                .description("Some description 2")
-                .genre("genre 2")
-                .price(12.12)
-                .publishedDate(LocalDate.now())
-                .publisher("Publisher 2")
-                .title("Another title 2")
-                .build();
-        booksTable.getItems().add(book);
+    /**
+     * Opens file chooser where you can choose xml file that contains books. Books will be added to current books.
+     */
+    public void loadBooksButton() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
+        File file = fileChooser.showOpenDialog(booksTable.getScene().getWindow());
+        if (file != null) {
+            try {
+                List<Book> newBooks = BooksReaderFactory.getBooksReader(BooksReaderFactory.XML).read(file.getPath());
+                booksTable.getItems().addAll(newBooks);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
