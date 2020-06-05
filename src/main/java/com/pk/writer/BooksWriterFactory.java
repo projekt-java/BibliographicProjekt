@@ -1,5 +1,7 @@
 package com.pk.writer;
 
+import javafx.stage.FileChooser;
+
 /**
  * Returns specific {@link BooksWriter}.
  */
@@ -7,6 +9,23 @@ public class BooksWriterFactory {
     public static final int BIBTEX = 0;
     public static final int RTF = 1;
     public static final int TXT = 2;
+
+    /**
+     * @param format Represents format of file.
+     * @return Extension Filter of given format.
+     */
+    public static FileChooser.ExtensionFilter getExtensionsFilter(int format) {
+        switch (format) {
+            case BIBTEX:
+                return new FileChooser.ExtensionFilter("BibTeX", ".bib");
+            case RTF:
+                return new FileChooser.ExtensionFilter("RTF", ".rtf");
+            case TXT:
+                return new FileChooser.ExtensionFilter("TXT", ".txt");
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
 
     /**
      * <p>Returns {@link BooksWriter}. You can choose specific writer by giving one of the constants that represents
@@ -21,9 +40,9 @@ public class BooksWriterFactory {
     public static BooksWriter getBooksWriter(int format) {
         switch (format) {
             case BIBTEX:
-                return null; // todo return bibtex writer
+                return new BibTexWriter();
             case RTF:
-                return null; // todo return rtf writer
+                return new RtfWriter();
             case TXT:
                 return new TxtWriter();
             default:

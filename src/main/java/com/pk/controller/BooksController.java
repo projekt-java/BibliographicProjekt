@@ -1,6 +1,8 @@
 package com.pk.controller;
 
 import com.pk.model.Book;
+import com.pk.writer.BooksWriterFactory;
+import javafx.collections.ObservableList;
 import com.pk.reader.BooksReaderFactory;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -128,5 +130,42 @@ public class BooksController {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Saves books to file.
+     * @param fileType Format of file.
+     */
+    private void saveBooks(int fileType) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(BooksWriterFactory.getExtensionsFilter(fileType));
+        File file = fileChooser.showSaveDialog(booksTable.getScene().getWindow());
+        if (file != null) {
+            String path = file.getPath();
+            System.out.println(path);
+            ObservableList<Book> books = booksTable.getItems();
+            BooksWriterFactory.getBooksWriter(fileType).write(books.toArray(new Book[books.size()]), path);
+        }
+    }
+
+    /**
+     * Saves books to rtf file.
+     */
+    public void saveRtf() {
+        saveBooks(BooksWriterFactory.RTF);
+    }
+
+    /**
+     * Saves books to bibtex file.
+     */
+    public void saveBibTeX() {
+        saveBooks(BooksWriterFactory.BIBTEX);
+    }
+
+    /**
+     * Saves books to txt file.
+     */
+    public void savePlainText() {
+        saveBooks(BooksWriterFactory.TXT);
     }
 }
