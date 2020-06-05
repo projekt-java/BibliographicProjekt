@@ -1,11 +1,13 @@
 package com.pk.controller;
 
 import com.pk.model.Book;
+import com.pk.reader.BooksReaderFactory;
 import com.pk.writer.BooksWriterFactory;
 import javafx.collections.ObservableList;
-import com.pk.reader.BooksReaderFactory;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -167,5 +169,18 @@ public class BooksController {
      */
     public void savePlainText() {
         saveBooks(BooksWriterFactory.TXT);
+    }
+
+    /**
+     * Removes all books.
+     */
+    public void reset() {
+        String msg = "Do you want to remove all books?";
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, msg, ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            booksTable.getItems().clear();
+        }
     }
 }
