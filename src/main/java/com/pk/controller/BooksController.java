@@ -6,6 +6,8 @@ import com.pk.writer.BooksWriterFactory;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -173,6 +175,12 @@ public class BooksController {
      * Removes all books.
      */
     public void reset() {
-        booksTable.getItems().clear();
+        String msg = "Do you want to remove all books?";
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, msg, ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            booksTable.getItems().clear();
+        }
     }
 }
