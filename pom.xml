@@ -32,7 +32,16 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.tutego</groupId>
+            <artifactId>jrtf</artifactId>
+            <version>0.7</version>
+        </dependency>
+
+
     </dependencies>
+
+
     <build>
         <plugins>
             <plugin>
