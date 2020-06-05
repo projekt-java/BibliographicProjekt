@@ -10,6 +10,10 @@ public class BooksWriterFactory {
     public static final int RTF = 1;
     public static final int TXT = 2;
 
+    /**
+     * @param format Represents format of file.
+     * @return Extension Filter of given format.
+     */
     public static FileChooser.ExtensionFilter getExtensionsFilter(int format) {
         switch (format) {
             case BIBTEX:

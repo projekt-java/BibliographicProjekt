@@ -134,6 +134,10 @@ public class BooksController {
         booksTable.getItems().add(book);
     }
 
+    /**
+     * Saves books to file.
+     * @param fileType Format of file.
+     */
     private void saveBooks(int fileType) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(BooksWriterFactory.getExtensionsFilter(fileType));
@@ -146,14 +150,23 @@ public class BooksController {
         }
     }
 
+    /**
+     * Saves books to rtf file.
+     */
     public void saveRtf() {
         saveBooks(BooksWriterFactory.RTF);
     }
 
+    /**
+     * Saves books to bibtex file.
+     */
     public void saveBibTeX() {
         saveBooks(BooksWriterFactory.BIBTEX);
     }
 
+    /**
+     * Saves books to txt file.
+     */
     public void savePlainText() {
         saveBooks(BooksWriterFactory.TXT);
     }
