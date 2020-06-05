@@ -6,10 +6,7 @@ import com.pk.writer.BooksWriterFactory;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
@@ -34,6 +31,13 @@ public class BooksController {
     public TableColumn<Book, LocalDate> publishedColumn;
     public TableColumn<Book, Double> priceColumn;
     public TableColumn<Book, String> descriptionColumn;
+    public TextField publisherInput;
+    public TextField genreInput;
+    public TextField titleInput;
+    public TextField authorInput;
+    public TextArea descriptionInput;
+    public Spinner<Double> priceInput;
+    public DatePicker publishedDatePicker;
 
     /**
      * Initialize column
@@ -110,12 +114,23 @@ public class BooksController {
         booksTable.setEditable(true);
     }
 
+    private void initPriceSpinner() {
+        SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory
+                .DoubleSpinnerValueFactory(0.0, Short.MAX_VALUE, 10.0, 0.5);
+        priceInput.setValueFactory(valueFactory);
+    }
 
+    private void initPublishedDateSpinner() {
+
+    }
 
     @FXML
     void initialize() {
+        initPublishedDateSpinner();
+        initPriceSpinner();
         initTable();
     }
+
 
     /**
      * Opens file chooser where you can choose xml file that contains books. Books will be added to current books.
@@ -182,5 +197,23 @@ public class BooksController {
         if (alert.getResult() == ButtonType.YES) {
             booksTable.getItems().clear();
         }
+    }
+
+    public void addNewBook() {
+        Book book = Book.builder()
+                .author(authorInput.getText())
+                .description(descriptionInput.getText())
+                .genre(genreInput.getText())
+                .title(titleInput.getText())
+                .publisher(publisherInput.getText())
+                .price(priceInput.getValue())
+                .publishedDate(publishedDatePicker.getValue())
+                .build();
+        booksTable.getItems().add(book);
+        authorInput.setText("");
+        descriptionInput.setText("");
+        genreInput.setText("");
+        titleInput.setText("");
+        publisherInput.setText("");
     }
 }
