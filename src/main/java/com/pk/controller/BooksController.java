@@ -113,6 +113,9 @@ public class BooksController {
         initTable();
     }
 
+    /**
+     * Opens file chooser where you can choose xml file that contains books. Books will be added to current books.
+     */
     public void loadBooksButton() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML", "*.xml"));
