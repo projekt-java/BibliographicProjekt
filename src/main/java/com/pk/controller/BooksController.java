@@ -6,6 +6,7 @@ import com.pk.writer.BooksWriterFactory;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -16,13 +17,15 @@ import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.LocalDateStringConverter;
 
 import java.io.File;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Controller of books view.
  */
-public class BooksController {
+public class BooksController implements Initializable {
     public TableView<Book> booksTable;
     public TableColumn<Book, String> authorColumn;
     public TableColumn<Book, String> titleColumn;
@@ -38,6 +41,12 @@ public class BooksController {
     public TextArea descriptionInput;
     public Spinner<Double> priceInput;
     public DatePicker publishedDatePicker;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initPriceSpinner();
+        initTable();
+    }
 
     /**
      * Initialize column
@@ -121,12 +130,6 @@ public class BooksController {
         SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory
                 .DoubleSpinnerValueFactory(0.0, Short.MAX_VALUE, 10.0, 0.5);
         priceInput.setValueFactory(valueFactory);
-    }
-
-    @FXML
-    void initialize() {
-        initPriceSpinner();
-        initTable();
     }
 
 
