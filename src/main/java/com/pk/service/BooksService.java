@@ -5,6 +5,7 @@ import com.pk.model.Book;
 import org.dom4j.Element;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.Set;
@@ -92,9 +93,17 @@ public class BooksService {
      * @return {@link Book} converted from xml {@link Element}.
      */
     public static Book xmlElementToBook(Element el) {
-        // getting published_date from element. If there is no published_date, it returns null.
         String stringDate = ofNullable(el.element("published_date")).orElse(new ElementAdapter(null)).getText();
-        double price = parseDouble(ofNullable(el.element("price")).orElse(new ElementAdapter("0.01")).getText());
+
+        LocalDate publishedDate = null;
+        try {
+            publishedDate = LocalDate.parse(stringDate);
+        } catch (DateTimeParseException ignored) {}
+
+        double price = 10.0;
+        try {
+            price = parseDouble(ofNullable(el.element("price")).orElse(new ElementAdapter("10.0")).getText());
+        } catch (NumberFormatException ignored) {}
 
         // Every lines checks if value exists. ofNullable method checks if expected element exists, if not, orElse
         // method returns custom element.
@@ -103,7 +112,7 @@ public class BooksService {
                 .title(ofNullable(el.element("title")).orElse(new ElementAdapter(null)).getText())
                 .genre(ofNullable(el.element("genre")).orElse(new ElementAdapter(null)).getText())
                 .publisher(ofNullable(el.element("publisher")).orElse(new ElementAdapter(null)).getText())
-                .publishedDate(stringDate != null ? LocalDate.parse(stringDate) : null)
+                .publishedDate(publishedDate)
                 .price(price > 0 ? price : 10)
                 .description(ofNullable(el.element("description")).orElse(new ElementAdapter(null)).getText())
                 .build();
