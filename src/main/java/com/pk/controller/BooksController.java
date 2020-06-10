@@ -5,7 +5,6 @@ import com.pk.reader.BooksReaderFactory;
 import com.pk.writer.BooksWriterFactory;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -110,7 +109,12 @@ public class BooksController implements Initializable {
         priceColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         priceColumn.setOnEditCommit(e -> {
             Book book = e.getTableView().getItems().get(e.getTablePosition().getRow());
-            book.setPrice(e.getNewValue());
+            if (e.getNewValue() > 0) {
+                book.setPrice(e.getNewValue());
+            }
+            else {
+                booksTable.refresh();
+            }
         });
 
         initColumn(publishedColumn, "publishedDate");
