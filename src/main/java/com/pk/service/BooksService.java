@@ -94,6 +94,7 @@ public class BooksService {
     public static Book xmlElementToBook(Element el) {
         // getting published_date from element. If there is no published_date, it returns null.
         String stringDate = ofNullable(el.element("published_date")).orElse(new ElementAdapter(null)).getText();
+        double price = parseDouble(ofNullable(el.element("price")).orElse(new ElementAdapter("0.01")).getText());
 
         // Every lines checks if value exists. ofNullable method checks if expected element exists, if not, orElse
         // method returns custom element.
@@ -103,7 +104,7 @@ public class BooksService {
                 .genre(ofNullable(el.element("genre")).orElse(new ElementAdapter(null)).getText())
                 .publisher(ofNullable(el.element("publisher")).orElse(new ElementAdapter(null)).getText())
                 .publishedDate(stringDate != null ? LocalDate.parse(stringDate) : null)
-                .price(parseDouble(ofNullable(el.element("price")).orElse(new ElementAdapter("0")).getText()))
+                .price(price > 0 ? price : 10)
                 .description(ofNullable(el.element("description")).orElse(new ElementAdapter(null)).getText())
                 .build();
     }
