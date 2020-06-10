@@ -5,4 +5,5 @@ module com.pk {
     requires jrtf;
     exports com.pk;
     exports com.pk.controller;
+    exports com.pk.model;
 }
