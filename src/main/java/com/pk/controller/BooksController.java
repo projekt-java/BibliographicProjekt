@@ -131,8 +131,19 @@ public class BooksController implements Initializable {
      */
     private void initPriceSpinner() {
         SpinnerValueFactory.DoubleSpinnerValueFactory valueFactory = new SpinnerValueFactory
-                .DoubleSpinnerValueFactory(0.0, Short.MAX_VALUE, 10.0, 0.5);
+                .DoubleSpinnerValueFactory(0.01, Short.MAX_VALUE, 10.0, 0.5);
         priceInput.setValueFactory(valueFactory);
+
+        priceInput.getEditor().textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*(,\\d*)?")) {
+                priceInput.getEditor().setText(oldValue);
+            }
+        });
+
+        priceInput.focusedProperty().addListener((s, ov, nv) -> {
+            if (nv) return;
+            priceInput.commitValue();
+        });
     }
 
 

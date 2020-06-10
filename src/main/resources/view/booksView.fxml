@@ -72,7 +72,7 @@
                   <TextField fx:id="titleInput" promptText="title" GridPane.columnIndex="1" />
                   <TextField fx:id="genreInput" promptText="genre" GridPane.columnIndex="2" />
                   <TextField fx:id="publisherInput" promptText="publisher" GridPane.rowIndex="1" />
-                  <Spinner fx:id="priceInput" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Spinner fx:id="priceInput" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <DatePicker fx:id="publishedDatePicker" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
