@@ -110,11 +110,10 @@ public class BooksController implements Initializable {
         priceColumn.setOnEditCommit(e -> {
             Book book = e.getTableView().getItems().get(e.getTablePosition().getRow());
             if (e.getNewValue() > 0) {
-                book.setPrice(e.getNewValue());
+                double price = Math.floor(e.getNewValue() * 100.0) / 100.0;
+                book.setPrice(price);
             }
-            else {
-                booksTable.refresh();
-            }
+            booksTable.refresh();
         });
 
         initColumn(publishedColumn, "publishedDate");
