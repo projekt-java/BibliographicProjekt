@@ -85,7 +85,7 @@ class XmlReaderTest {
 
         // then
         List<Book> expected = Stream.of(
-                new Book(null, null, null, null, null, 0, null),
+                new Book(null, null, null, null, null, 10, null),
                 new Book("Alia Ciccottio", "Snakes on a Plane", "Action|Comedy|Horror|Thriller",
                         "Penguin Random House", LocalDate.parse("1994-12-21"), 59.62, "desc")
         ).collect(Collectors.toList());

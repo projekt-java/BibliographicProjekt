@@ -93,7 +93,7 @@ public class BooksService {
      * @return {@link Book} converted from xml {@link Element}.
      */
     public static Book xmlElementToBook(Element el) {
-        String stringDate = ofNullable(el.element("published_date")).orElse(new ElementAdapter(null)).getText();
+        String stringDate = ofNullable(el.element("published_date")).orElse(new ElementAdapter("")).getText();
 
         LocalDate publishedDate = null;
         try {

@@ -87,7 +87,7 @@ class BooksServiceTest {
         Book actual = BooksService.xmlElementToBook(element);
 
         // then
-        Book expected = new Book(null, null, null, null, null, 0,
+        Book expected = new Book(null, null, null, null, null, 10,
                 null);
         assertEquals(expected, actual);
     }
